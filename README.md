@@ -1,10 +1,10 @@
 # Handle Split Views like it's 2022
 
-![downloads](https://img.shields.io/npm/dm/react-better-splitviews?style=flat-square) ![minzip size](https://badgen.net/bundlephobia/minzip/react-better-splitviews?style=flat-square) ![tree shaking](https://badgen.net/bundlephobia/tree-shaking/react-better-splitviews?style=flat-square)
+<img src="https://img.shields.io/npm/dm/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/minzip/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/tree-shaking/react-better-splitviews?style=flat-square" />
 
 ### [Live demo](http://1amchris.github.io/react-better-splitviews/)
 
-Nowadays, split views are everywhere, and yet it looked like there wasn't a great one, with an easy-to-use API, for React -- so I made one. I've fetched great inspiration from the [Visual Studio Code](https://code.visualstudio.com) split views. They're discrete, and they feel great.
+Nowadays, split views are everywhere, and yet it looked like there wasn't a great one, with an easy-to-use API, for React -- so we made one. We've fetched great inspiration from the [Visual Studio Code](https://code.visualstudio.com) split views. They're discrete, and they feel great.
 
 🐥 Tiny <a href="https://bundlephobia.com/result?p=react-better-splitviews" target="__blank">~4kb</a>
 
@@ -25,17 +25,17 @@ yarn add react-better-splitviews
 and
 
 ```jsx
-import SplitView from "react-better-splitviews";
+import { SplitView } from "react-better-splitviews";
 ```
 
 ## Examples
 
 There are 2 orientations you can use for your `SplitView`: `rows` or `columns`.
 
-### 1. Rows (default orientation)
+### 1. Rows (default)
 
 ```jsx
-import SplitView from "react-better-splitviews";
+import { SplitView } from "react-better-splitviews";
 
 const CustomComponent = () => {
   return (
@@ -51,7 +51,7 @@ const CustomComponent = () => {
 <details><summary>With constraints</summary>
 
 ```jsx
-import SplitView from "react-better-splitviews";
+import { SplitView } from "react-better-splitviews";
 
 const CustomComponent = () => {
   return (
@@ -81,7 +81,7 @@ const CustomComponent = () => {
 ### 2. Columns
 
 ```jsx
-import SplitView from "react-better-splitviews";
+import { SplitView } from "react-better-splitviews";
 
 const CustomComponent = () => {
   return (
@@ -97,7 +97,7 @@ const CustomComponent = () => {
 <details><summary>With constraints</summary>
 
 ```jsx
-import SplitView from "react-better-splitviews";
+import { SplitView } from "react-better-splitviews";
 
 const CustomComponent = () => {
   return (
@@ -129,7 +129,7 @@ const CustomComponent = () => {
 Support for various combinations of Splitviews is supported. For example, this looks a bit like the [Visual Studio Code layout](https://code.visualstudio.com/api/ux-guidelines/overview).
 
 ```jsx
-import SplitView from "react-better-splitviews";
+import { SplitView } from "react-better-splitviews";
 
 const CustomComponent = () => {
   return (
@@ -160,7 +160,7 @@ const CustomComponent = () => {
 };
 ```
 
-Please let me know if the examples above don't fit your needs.
+Please let us know if the examples above don't fit your needs.
 
 ## Contributing
 

@@ -125,12 +125,12 @@ enum OverflowDirection {
 
 export interface SplitViewProperties {
   children: ReactNode;
-  style: CSSProperties;
-  direction: Direction;
-  handleOptions: HandleOptions;
+  style?: CSSProperties;
+  direction?: Direction;
+  handleOptions?: HandleOptions;
 }
 
-function SplitView({
+export function SplitView({
   children,
   style = {},
   direction = "row",
@@ -376,5 +376,3 @@ function SplitView({
     setHandlePosition(undefined);
   }
 }
-
-export default SplitView;
