@@ -1,4 +1,4 @@
-# Handle Split views like it's 2022
+# Handle Split Views like it's 2022
 
 ![downloads](https://img.shields.io/npm/dm/react-better-splitviews?style=flat-square) ![minzip size](https://badgen.net/bundlephobia/minzip/react-better-splitviews?style=flat-square) ![tree shaking](https://badgen.net/bundlephobia/tree-shaking/react-better-splitviews?style=flat-square)
 
