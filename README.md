@@ -1,18 +1,20 @@
 # Handle Split Views like it's 2022
 
-<img src="https://img.shields.io/npm/dm/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/minzip/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/tree-shaking/react-better-splitviews?style=flat-square" />
+<img src="https://badgen.net/bundlephobia/dependency-count/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/minzip/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/tree-shaking/react-better-splitviews?style=flat-square" />
 
 ### [Live demo](http://1amchris.github.io/react-better-splitviews/)
 
 Nowadays, split views are everywhere, and yet it looked like there wasn't a great one, with an easy-to-use API, for React -- so we made one. We've fetched great inspiration from the [Visual Studio Code](https://code.visualstudio.com) split views. They're discrete, and they feel great.
 
-🐥 Tiny <a href="https://bundlephobia.com/result?p=react-better-splitviews" target="__blank">~4kb</a>
+🐥 Tiny <a href="https://bundlephobia.com/result?p=react-better-splitviews" target="blank">~28kb</a>
 
 🐼 Written in TypeScript
 
 🦁 Use standard CSS properties to customize the SplitView and it's views
 
 🦄 A simple, easy-to-use API, and a beautiful SplitView! No redundancy! All hail the unicorns!
+
+<i>TypeScript-lovers notice: All type declarations are included in the package. No need to install @types.</i>
 
 ## Installation
 
