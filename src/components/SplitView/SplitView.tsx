@@ -5,8 +5,10 @@ import React, {
   useState,
   MouseEvent,
 } from "react";
-import { max, min, sum } from "lodash";
 import { useResizeDetector } from "react-resize-detector";
+
+const sum = (...values: number[]) =>
+  values.reduce((partialSum, value) => partialSum + value, 0);
 
 export interface HandleOptions {
   focusedColor: string;
@@ -99,7 +101,7 @@ class ViewOptionsUtils {
   static getSumOfSizes(viewsOptions: ViewOptions[]): number {
     return (
       sum(
-        viewsOptions.map((option: ViewOptions) =>
+        ...viewsOptions.map((option: ViewOptions) =>
           ViewOptionsUtils.getValue(option.size)
         )
       ) || 0
@@ -128,7 +130,7 @@ export interface SplitViewProperties {
   handleOptions: HandleOptions;
 }
 
-export const SplitView = ({
+function SplitView({
   children,
   style = {},
   direction = "row",
@@ -138,7 +140,7 @@ export const SplitView = ({
     defaultSize: 1,
     defaultColor: "lightgray",
   },
-}: SplitViewProperties) => {
+}: SplitViewProperties) {
   const directionIsColumn = direction === "column";
 
   const [selectedHandle, setSelectedHandle] = useState<number | undefined>();
@@ -186,14 +188,14 @@ export const SplitView = ({
 
       // distribute the remaining space evenly (should really only happen the first time)
       const used = sum(
-        viewsOptions.map((options: ViewOptions) =>
+        ...viewsOptions.map((options: ViewOptions) =>
           ViewOptionsUtils.getValue(options.size)
         )
       );
-      const available = max([
+      const available = Math.max(
         0,
-        (directionIsColumn ? height! : width!) - used,
-      ])!;
+        (directionIsColumn ? height! : width!) - used
+      );
       const undefinedSizesIndices = viewsOptions
         .map(
           (options: ViewOptions, index: number) =>
@@ -291,7 +293,7 @@ export const SplitView = ({
 
   function getPosition(viewIndex: number, viewsOptions: ViewOptions[]): number {
     return sum(
-      viewsOptions
+      ...viewsOptions
         .slice(0, viewIndex)
         .map((options: ViewOptions) => ViewOptionsUtils.getValue(options.size))
     );
@@ -317,10 +319,10 @@ export const SplitView = ({
       (direction === OverflowDirection.LeftOrUp ? -distance : +distance);
 
     const { maxSize, minSize } = viewsOptions[viewIndex];
-    const possibleSize = min([
+    const possibleSize = Math.min(
       ViewOptionsUtils.getValue(maxSize) || Infinity,
-      max([ViewOptionsUtils.getValue(minSize), desiredSize])!,
-    ])!;
+      Math.max(ViewOptionsUtils.getValue(minSize), desiredSize)
+    );
 
     const sizeDiff = possibleSize - desiredSize;
     let gained = possibleSize - currentSize;
@@ -373,4 +375,6 @@ export const SplitView = ({
     setSelectedHandle(undefined);
     setHandlePosition(undefined);
   }
-};
+}
+
+export default SplitView;
