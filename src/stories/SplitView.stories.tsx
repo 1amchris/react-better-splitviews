@@ -35,7 +35,7 @@ stories.add("App", () => {
             <PlaceholderView style={{ minWidth: 100, maxWidth: 700 }} />
             <PlaceholderView style={{ minWidth: 100 }} />
           </SplitView>
-          <PlaceholderView style={{ height: "25%", maxHeight: "90%" }} />
+          <PlaceholderView style={{ height: "25%", maxHeight: "40%" }} />
         </SplitView>
       </SplitView>
     </div>
