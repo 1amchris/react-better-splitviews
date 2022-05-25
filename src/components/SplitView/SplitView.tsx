@@ -239,7 +239,7 @@ export function SplitView({
         position: "relative",
       }}
       // onMouseDown is on the Handler
-      onMouseMove={(e) => resizeView(e)}
+      onMouseMove={(e) => resizeViews(e)}
       onMouseUp={() => unselectView()}
     >
       {renderView([].concat(children as any)[0], 0)}
@@ -265,12 +265,12 @@ export function SplitView({
         {React.cloneElement(children, {
           style: {
             ...children.props.style,
-            minHeight: null,
-            maxHeight: null,
-            minWidth: null,
-            maxWidth: null,
             width: "100%",
             height: "100%",
+            maxWidth: null,
+            minWidth: null,
+            maxHeight: null,
+            minHeight: null,
           },
         })}
       </div>
@@ -305,10 +305,11 @@ export function SplitView({
     setHandlePosition(directionIsColumn ? e.clientY : e.clientX);
   }
 
-  function resize(
+  function resizeView(
     direction: OverflowDirection,
     viewIndex: number,
-    distance: number
+    distance: number,
+    dryRun: boolean = false
   ) {
     if (!(0 <= viewIndex && viewIndex < viewsOptions.length) || distance === 0)
       return 0;
@@ -325,42 +326,70 @@ export function SplitView({
     );
 
     const sizeDiff = possibleSize - desiredSize;
-    let gained = possibleSize - currentSize;
+    const currentSizeGain = possibleSize - currentSize;
+    let childrenSizeGain = 0;
 
     if (sizeDiff !== 0) {
-      gained += resize(
+      childrenSizeGain += resizeView(
         direction,
         viewIndex + (direction === OverflowDirection.LeftOrUp ? -1 : 1),
-        direction === OverflowDirection.LeftOrUp ? sizeDiff : -sizeDiff
+        direction === OverflowDirection.LeftOrUp ? sizeDiff : -sizeDiff,
+        dryRun
       );
     }
 
-    viewsOptions[viewIndex].size = `${possibleSize}px`;
-    return gained;
+    if (!dryRun) {
+      viewsOptions[viewIndex].size = `${possibleSize}px`;
+    }
+    return currentSizeGain + childrenSizeGain;
   }
 
-  function resizeView({ clientX, clientY, currentTarget, buttons }: any) {
+  function resizeViews({ clientX, clientY, currentTarget, buttons }: any) {
     if (selectedHandle === undefined || handlePosition === undefined) return;
     if (buttons !== 1) return unselectView();
 
-    // get the mouse displacement/delta
+    // get the mouse displacement
     const mousePosition = directionIsColumn ? clientY : clientX;
-    const delta = handlePosition - mousePosition;
+    const desiredDisplacement = handlePosition - mousePosition;
+    if (desiredDisplacement === 0) return;
 
     // get new views dimensions
-    const priorTotalSize = ViewOptionsUtils.getSumOfSizes(viewsOptions);
-    resize(OverflowDirection.LeftOrUp, selectedHandle - 1, delta);
-    resize(OverflowDirection.RightOrDown, selectedHandle, delta);
-    const posteriorTotalSize = ViewOptionsUtils.getSumOfSizes(viewsOptions);
-    const totalSizeDelta = posteriorTotalSize - priorTotalSize;
+    // run a simulation
+    const possibleLeftOrUpDisplacement = Math.abs(
+      resizeView(
+        OverflowDirection.LeftOrUp,
+        selectedHandle - 1,
+        desiredDisplacement,
+        true
+      )
+    );
+    const possibleRightOrDownDisplacement = Math.abs(
+      resizeView(
+        OverflowDirection.RightOrDown,
+        selectedHandle,
+        desiredDisplacement,
+        true
+      )
+    );
 
-    // remove the difference in container size to the "growing view" size.
-    // if there is a difference, it means that all of the "shrinking views" have reached their minSize, but the "growing view" didn't stop growing. (it might be a hack)
-    //  shrinking view: the view that's losing screen estate
-    //  growing view: the view that's gaining screen estate
-    const viewIndex = delta < 0 ? selectedHandle - 1 : selectedHandle;
-    const size = ViewOptionsUtils.getValue(viewsOptions[viewIndex].size);
-    viewsOptions[viewIndex].size = `${size! - totalSizeDelta}px`;
+    // maximize the possible displacement for both sides
+    const possibleDisplacement = Math.min(
+      possibleLeftOrUpDisplacement,
+      possibleRightOrDownDisplacement
+    );
+    const direction = desiredDisplacement / Math.abs(desiredDisplacement);
+
+    // resize the views (for real)
+    resizeView(
+      OverflowDirection.LeftOrUp,
+      selectedHandle - 1,
+      possibleDisplacement * direction
+    );
+    resizeView(
+      OverflowDirection.RightOrDown,
+      selectedHandle,
+      possibleDisplacement * direction
+    );
 
     // get new handle position
     const { top, left } = currentTarget.getBoundingClientRect();
