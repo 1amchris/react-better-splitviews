@@ -128,6 +128,9 @@ export interface SplitViewProperties {
   style?: CSSProperties;
   direction?: Direction;
   handleOptions?: HandleOptions;
+  onGrabHandle?: () => void;
+  onDragHandle?: () => void;
+  onReleaseHandle?: () => void;
 }
 
 export default function SplitView({
@@ -140,6 +143,9 @@ export default function SplitView({
     defaultSize: 1,
     defaultColor: "lightgray",
   },
+  onReleaseHandle,
+  onGrabHandle,
+  onDragHandle,
 }: SplitViewProperties) {
   const directionIsColumn = direction === "column";
 
@@ -303,6 +309,7 @@ export default function SplitView({
     e.preventDefault(); // prevents the dragging of the view instead of the handle
     setSelectedHandle(index);
     setHandlePosition(directionIsColumn ? e.clientY : e.clientX);
+    onGrabHandle?.call(null);
   }
 
   function resizeView(
@@ -398,10 +405,14 @@ export default function SplitView({
 
     setHandlePosition(relativeHandlePosition + parentOffset);
     setViewsOptions(viewsOptions);
+    onDragHandle?.call(null);
   }
 
   function unselectView() {
-    setSelectedHandle(undefined);
-    setHandlePosition(undefined);
+    if (selectedHandle !== undefined || handlePosition !== undefined) {
+      setSelectedHandle(undefined);
+      setHandlePosition(undefined);
+      onReleaseHandle?.call(null);
+    }
   }
 }

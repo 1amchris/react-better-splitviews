@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { storiesOf } from "@storybook/react";
 
 import SplitView from "../";
@@ -19,18 +19,47 @@ const PlaceholderView = ({ style }: any) => {
   );
 };
 
+function getGenericHandleHandlers(handlerType: string) {
+  return {
+    onGrabHandle: useCallback(() => {
+      console.log(`Grab Handle Handler: ${handlerType}`);
+    }, []),
+    onDragHandle: useCallback(() => {
+      console.log(`Drag Handle Handler: ${handlerType}`);
+    }, []),
+    onReleaseHandle: useCallback(() => {
+      console.log(`Release Handle Handler: ${handlerType}`);
+    }, []),
+  };
+}
+
 stories.add("App", () => {
   return (
     <div style={{ border: "#eee 1px solid", height: "500px" }}>
-      <SplitView style={{ background: "white" }}>
-        <SplitView style={{ width: "25%" }} direction="column">
+      <SplitView
+        style={{ background: "white" }}
+        {...getGenericHandleHandlers("app")}
+      >
+        <SplitView
+          style={{ width: "25%" }}
+          direction="column"
+          {...getGenericHandleHandlers("sidebar")}
+        >
           <PlaceholderView style={{ minHeight: 24 }} />
           <PlaceholderView style={{ minHeight: 24, maxHeight: "35%" }} />
           <PlaceholderView style={{ minHeight: 24, maxHeight: "50%" }} />
           <PlaceholderView style={{ minHeight: 24 }} />
         </SplitView>
-        <SplitView style={{ minWidth: 100 }} direction="column">
-          <SplitView style={{ minWidth: 100 }} direction="row">
+        <SplitView
+          style={{ minWidth: 100 }}
+          direction="column"
+          {...getGenericHandleHandlers("main")}
+        >
+          <SplitView
+            style={{ minWidth: 100 }}
+            direction="row"
+            // {...getGenericHandleHandlers("editor groups")}
+          >
             <PlaceholderView style={{ minWidth: 100 }} />
             <PlaceholderView style={{ minWidth: 100, maxWidth: 700 }} />
             <PlaceholderView style={{ minWidth: 100 }} />
