@@ -130,7 +130,7 @@ export interface SplitViewProperties {
   handleOptions?: HandleOptions;
 }
 
-export function SplitView({
+export default function SplitView({
   children,
   style = {},
   direction = "row",

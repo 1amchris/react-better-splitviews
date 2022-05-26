@@ -1,7 +1,7 @@
 import React from "react";
 import { storiesOf } from "@storybook/react";
 
-import { SplitView } from "../components/SplitView";
+import SplitView from "../";
 
 const stories = storiesOf("App Test", module);
 
