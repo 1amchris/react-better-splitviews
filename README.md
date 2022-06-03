@@ -6,7 +6,7 @@
 
 Nowadays, split views are everywhere, and yet it looked like there wasn't a great one, with an easy-to-use API, for React -- so we made one. We've fetched great inspiration from the [Visual Studio Code](https://code.visualstudio.com) split views. They're discrete, and they feel great.
 
-🐥 Tiny <a href="https://bundlephobia.com/result?p=react-better-splitviews" target="blank">~28kb</a>
+🐥 Tiny <a href="https://bundlephobia.com/result?p=react-better-splitviews" target="blank">~4.7kb</a>
 
 🐼 Written in TypeScript
 
@@ -135,18 +135,14 @@ import { SplitView } from "react-better-splitviews";
 
 const CustomComponent = () => {
   return (
-    <SplitView id="vs-code__container">
-      <SplitView
-        id="side-bar__explorer"
-        style={{ width: "25%" }}
-        direction="column"
-      >
+    <SplitView id="container">
+      <SplitView id="side-bar" style={{ width: "25%" }} direction="column">
         <Workspace style={{ minHeight: 24 }} />
         <Outline style={{ minHeight: 24 }} />
         <TimeLine style={{ minHeight: 24 }} />
       </SplitView>
       <SplitView
-        id="editors_panel__wrapper"
+        id="editors_panel"
         style={{ minWidth: 100 }}
         direction="column"
       >
@@ -162,23 +158,24 @@ const CustomComponent = () => {
 };
 ```
 
-Please let us know if the examples above don't fit your needs.
+Please let us know if you need more examples.
 
 ## Contributing
 
-While we are confident this library will work for most use cases, it is still young. We welcome any feedback, recommendations, pull requests to make it even better!
+While we are confident this library will work for most use cases, it is still young. We welcome any feedback, recommendations and pull requests to make it even better!
 
 ## API
 
 ### SplitViewProperties
 
-| Prop          | Type          | Description                                                                                 | Default                             |
-| ------------- | ------------- | ------------------------------------------------------------------------------------------- | ----------------------------------- |
-| style         | CSSProperties | Object with CSS Properties to be applied to the SplitView                                   | `{ height: "100%", width: "100%" }` |
-| direction     | Direction     | Specifies the direction of the splitview. Much like Flexboxes, it can be `row` or `column`. | `"row"`                             |
-| handleOptions | HandleOptions | Specified the looks and feel of the Handle.                                                 | [see HandleOptions](#HandleOptions) |
-
-### HandleOptions
+| Prop            | Type          | Description                                                                                 | Default                             |
+| --------------- | ------------- | ------------------------------------------------------------------------------------------- | ----------------------------------- |
+| style           | CSSProperties | Object with CSS Properties to be applied to the SplitView                                   | `{ height: "100%", width: "100%" }` |
+| direction       | Direction     | Specifies the direction of the splitview. Much like Flexboxes, it can be `row` or `column`. | `"row"`                             |
+| handleOptions   | HandleOptions | Specified the looks and feel of the Handle.                                                 | [see HandleOptions](#HandleOptions) |
+| onGrabHandle    | Function      | Gets called when a handle is grabbed by the user.                                           | `undefined` (is not called)         |
+| onDragHandle    | Function      | Gets called when a handle is moved by the user.                                             | `undefined` (is not called)         |
+| onReleaseHandle | Function      | Gets called when a handle is released by the user.                                          | `undefined` (is not called)         |
 
 | Prop         | Type   | Description                                                                                                  | Default       |
 | ------------ | ------ | ------------------------------------------------------------------------------------------------------------ | ------------- |
@@ -195,4 +192,4 @@ MIT
 
 Show us some love and STAR ⭐ the project if you find it useful
 
-Send us pictures of what you did the Better SplitViews library; we can't wait to see what the community we'll do with it! Cheers
+Send us pictures of what you did the Better SplitViews library; we can't wait to see what the community will do with it! Cheers
