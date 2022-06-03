@@ -177,6 +177,8 @@ While we are confident this library will work for most use cases, it is still yo
 | onDragHandle    | Function      | Gets called when a handle is moved by the user.                                             | `undefined` (is not called)         |
 | onReleaseHandle | Function      | Gets called when a handle is released by the user.                                          | `undefined` (is not called)         |
 
+### HandleOptions
+
 | Prop         | Type   | Description                                                                                                  | Default       |
 | ------------ | ------ | ------------------------------------------------------------------------------------------------------------ | ------------- |
 | focusedColor | string | When the handle is focused (hovered, selected), this is the color it will display. Any CSS colors work here. | `"#0D6EFD"`   |
