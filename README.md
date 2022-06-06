@@ -1,6 +1,6 @@
 # Handle Split Views like it's 2022
 
-<img src="https://badgen.net/bundlephobia/dependency-count/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/minzip/react-better-splitviews?style=flat-square" /> <img src="https://badgen.net/bundlephobia/tree-shaking/react-better-splitviews?style=flat-square" />
+<img src="https://badgen.net/bundlephobia/dependency-count/react-better-splitviews" /> <img src="https://badgen.net/bundlephobia/minzip/react-better-splitviews" /> <img src="https://badgen.net/bundlephobia/tree-shaking/react-better-splitviews" /> <img src="https://badgen.net/npm/dt/react-better-splitviews" />
 
 ### [Live demo](http://1amchris.github.io/react-better-splitviews/)
 
