@@ -288,7 +288,7 @@ export default function SplitView({
     const position = getPosition(viewIndex, viewsOptions);
 
     return {
-      overflow: "auto",
+      overflow: "clip",
       position: "absolute",
       top: directionIsColumn ? position : null,
       left: !directionIsColumn ? position : null,
